@@ -1,6 +1,7 @@
 // This script will be run within the webview itself
 // It cannot access the main VS Code APIs directly.
 
+// Sobald das hier läuft, sollten wir die Datei dynamisch laden
 let data = { "repo": "blah",
   "introduction": "Eure Aufgabe ist es, eine YAML-Datei namens test.yaml zu erstellen",
   "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/640px-Tic_tac_toe.svg.png",
@@ -83,3 +84,18 @@ window.addEventListener('DOMContentLoaded', event =>
     */
 });
 
+// Function to update the JSON data with values from the form
+function updateJSON(n) {
+    //FIXME: Wir können hier auch ne loop verwenden ...
+    jsonData[n].specs.title = document.getElementById('title').value;
+    jsonData[n].name = document.getElementById('name').value;
+    jsonData[n].feedback = document.getElementById('feedback').value;
+    jsonData[n].urls = document.getElementById('urls').value.split(',');
+    jsonData[n].keywords = document.getElementById('keywords').value.split(',');
+    jsonData[n].type = document.getElementById('type').value;
+    jsonData[n].run = document.getElementById('run').value;
+    jsonData[n].file = document.getElementById('file').value;
+    jsonData[n].output = document.getElementById('output').value;
+    jsonData[n].comparison = document.getElementById('comparison').value;
+    jsonData[n].points = parseInt(document.getElementById('points').value, 10);
+}

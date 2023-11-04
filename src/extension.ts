@@ -213,6 +213,7 @@ class HaaCPanel {
 		<button onclick="setViewConfig();">Config</button>
 		<button onclick="setViewTests();">Tests</button>
 		</div>
+		<div id="form-container">
 		<div id="config">
 		<div class="form-group">
 		  <label for="repo">Repo:</label>
@@ -302,6 +303,7 @@ class HaaCPanel {
 </div>
 
 <button onclick="updateJSON()">Save Changes</button>
+		</div>
 		</div>
 		</body>
 		</html>`;
