@@ -176,10 +176,12 @@ class HaaCPanel {
 		// Local path to css styles
 		const styleResetPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'reset.css');
 		const stylesPathMainPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css');
+		const stylesPathStylePath = vscode.Uri.joinPath(this._extensionUri, 'media', 'style.css');
 
 		// Uri to load styles into webview
 		const stylesResetUri = webview.asWebviewUri(styleResetPath);
 		const stylesMainUri = webview.asWebviewUri(stylesPathMainPath);
+		const stylesStyleUri = webview.asWebviewUri(stylesPathStylePath);
 
 		// Use a nonce to only allow specific scripts to be run
 		const nonce = getNonce();
@@ -200,6 +202,7 @@ class HaaCPanel {
 
 		<link href="${stylesResetUri}" rel="stylesheet">
 		<link href="${stylesMainUri}" rel="stylesheet">
+		<link href="${stylesStyleUri}" rel="stylesheet">
 		<script nonce="${nonce}" src="${scriptUri}"></script>
 		
 		<title>Edit JSON</title>
