@@ -184,12 +184,24 @@ class HaaCPanel {
 		// Use a nonce to only allow specific scripts to be run
 		const nonce = getNonce();
 
+		// FIXME: use separate template file ?
 		return `<!DOCTYPE html>
 		<html lang="en">
 		<head>
-		<script nonce="${nonce}" src="${scriptUri}"></script>
 		<meta charset="UTF-8">
+		<!--
+				Use a content security policy to only allow loading images from https or from our extension directory,
+				and only allow scripts that have a specific nonce.
+		-->
+		<!-- macht Probleme bzgl unseres Codes
+		<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; img-src ${webview.cspSource} https:; script-src 'nonce-${nonce}';">
+		-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link href="${stylesResetUri}" rel="stylesheet">
+		<link href="${stylesMainUri}" rel="stylesheet">
+		<script nonce="${nonce}" src="${scriptUri}"></script>
+		
 		<title>Edit JSON</title>
 		</head>
 		<body>
