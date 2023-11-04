@@ -112,7 +112,7 @@ class HaaCPanel {
 			message => {
 				switch (message.command) {
 					case 'alert':
-						vscode.window.showErrorMessage(message.text);
+						//vscode.window.showErrorMessage(message.text);
 						return;
 				}
 			},
@@ -184,31 +184,82 @@ class HaaCPanel {
 		// Use a nonce to only allow specific scripts to be run
 		const nonce = getNonce();
 
-		return `<!DOCTYPE html>
-			<html lang="en">
-			<head>
-				<meta charset="UTF-8">
-
-				<!--
-					Use a content security policy to only allow loading images from https or from our extension directory,
-					and only allow scripts that have a specific nonce.
-				-->
-				<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; img-src ${webview.cspSource} https:; script-src 'nonce-${nonce}';">
-
-				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-				<link href="${stylesResetUri}" rel="stylesheet">
-				<link href="${stylesMainUri}" rel="stylesheet">
-
-				<title>Cat Coding</title>
-			</head>
-			<body>
-				<img src="${catGifPath}" width="300" />
-				<h1 id="lines-of-code-counter">0</h1>
-
-				<script nonce="${nonce}" src="${scriptUri}"></script>
-			</body>
-			</html>`;
+		return `<!DOCTYPE html>67
+		<html lang="en">
+		<head>
+		<script nonce="${nonce}" src="${scriptUri}"></script>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Edit JSON</title>
+		<style>
+		  body {
+			font-family: Arial, sans-serif;
+			padding: 20px;
+		  }
+		  .form-group {
+			margin-bottom: 10px;
+		  }
+		  label {
+			display: block;
+			margin-bottom: 5px;
+		  }
+		  input[type="text"], input[type="url"] {
+			width: 100%;
+			padding: 8px;
+			margin-bottom: 10px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		  }
+		  input[type="checkbox"] {
+			margin-right: 5px;
+		  }
+		  button {
+			padding: 10px 15px;
+			background-color: #007bff;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		  }
+		  button:hover {
+			background-color: #0056b3;
+		  }
+		  .image-preview {
+			margin-bottom: 10px;
+		  }
+		  .image-preview img {
+			max-width: 100%;
+			height: auto;
+		  }
+		</style>
+		</head>
+		<body>
+		<h1>Edit JSON Data</h1>
+		
+		<div class="form-group">
+		  <label for="repo">Repo:</label>
+		  <input type="text" id="repo" name="repo">
+		</div>
+		
+		<div class="form-group">
+		  <label for="introduction">Introduction:</label>
+		  <input type="text" id="introduction" name="introduction" value="">
+		</div>
+		
+		<div class="form-group">
+		  <label for="logo_url">Logo URL:</label>
+		  <input type="url" id="logo_url" name="logo_url" value="">
+		  <div class="image-preview" id="image-preview">
+			<!-- Image preview will be displayed here -->
+		  </div>
+		</div>
+		
+		<div class="form-group">
+		  <label for="timeframe">Timeframe:</label>
+		  <input type="text" id="timeframe" name="timeframe" value="">
+		</div>
+		</body>
+		</html>`;
 	}
 }
 
