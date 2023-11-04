@@ -6,6 +6,7 @@ const cats = {
 	'Testing Cat': 'https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif'
 };
 
+// https://code.visualstudio.com/api/extension-guides/tree-view
 class TestDataProvider implements vscode.TreeDataProvider<TestItem> {
     getTreeItem(element: TestItem): vscode.TreeItem {
         return element;
@@ -15,6 +16,7 @@ class TestDataProvider implements vscode.TreeDataProvider<TestItem> {
         if (element === undefined) {
             // Fetch and return the root test elements here
             // For demonstration, returning hardcoded items
+	    // Hier müssen wir dann json laden
             return Promise.resolve([new TestItem('Test 1'), new TestItem('Test 2')]);
         }
 
