@@ -6,12 +6,41 @@ const cats = {
 	'Testing Cat': 'https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif'
 };
 
+class TestDataProvider implements vscode.TreeDataProvider<TestItem> {
+    getTreeItem(element: TestItem): vscode.TreeItem {
+        return element;
+    }
+
+    getChildren(element?: TestItem): Thenable<TestItem[]> {
+        if (element === undefined) {
+            // Fetch and return the root test elements here
+            // For demonstration, returning hardcoded items
+            return Promise.resolve([new TestItem('Test 1'), new TestItem('Test 2')]);
+        }
+
+        // Return children of the given element here
+        return Promise.resolve([]);
+    }
+}
+
+class TestItem extends vscode.TreeItem {
+    constructor(label: string) {
+        super(label);
+        // Additional properties and methods can be added as needed
+    }
+}
+
+
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand('HaaC.start', () => {
 			HaaCPanel.createOrShow(context.extensionUri);
 		})
+		
 	);
+
+	const testDataProvider = new TestDataProvider();
+    vscode.window.registerTreeDataProvider('autogradingTests', testDataProvider);
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('HaaC.doRefactor', () => {

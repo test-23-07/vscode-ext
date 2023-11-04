@@ -31,7 +31,15 @@
 				"title": "Do some refactoring",
 				"category": "HaaC"
 			}
-		]
+		],
+		"views": {
+			"explorer": [
+			  {
+				"id": "autogradingTests",
+				"name": "AutoGrading Tests"
+			  }
+			]
+		  }
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
