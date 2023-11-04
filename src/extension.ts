@@ -73,7 +73,7 @@ class HaaCPanel {
 		// Otherwise, create a new panel.
 		const panel = vscode.window.createWebviewPanel(
 			HaaCPanel.viewType,
-			'Cat Coding',
+			'Autograding (Haac)',
 			column || vscode.ViewColumn.One,
 			getWebviewOptions(extensionUri),
 		);
@@ -195,8 +195,8 @@ class HaaCPanel {
 		<body>
 		<h1>Edit JSON Data</h1>
 		<div>
-		<button onclick="SetViewConfig();">Config</button>
-		<button onclick="SetViewTests();">Tests</button>
+		<button onclick="setViewConfig();">Config</button>
+		<button onclick="setViewTests();">Tests</button>
 		</div>
 		<div id="config">
 		<div class="form-group">
@@ -222,8 +222,71 @@ class HaaCPanel {
 		  <input type="text" id="timeframe" name="timeframe" value="">
 		</div>
 		</div>
+
+		<!-- new "tab" -->
 		<div id="tests">
 		<h3>Tests</h3>
+
+<div class="form-group">
+  <label for="title">Title:</label>
+  <input type="text" id="title" name="title" value="">
+</div>
+
+<div class="form-group">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" value="">
+</div>
+
+<div class="form-group">
+  <label for="feedback">Feedback:</label>
+  <input type="text" id="feedback" name="feedback" value="">
+</div>
+
+<div class="form-group">
+  <label for="urls">URLs (comma-separated):</label>
+  <input type="text" id="urls" name="urls" value="">
+</div>
+
+<div class="form-group">
+  <label for="keywords">Keywords (comma-separated):</label>
+  <input type="text" id="keywords" name="keywords" value="">
+</div>
+
+<div class="form-group">
+  <label for="type">Type:</label>
+  <select id="type" name="type">
+    <option value="JSON">JSON</option>
+    <option value="YAML">YAML</option>
+    <option value="CloudFormation">CloudFormation</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="run">Run:</label>
+  <input type="text" id="run" name="run" value="">
+</div>
+
+<div class="form-group">
+  <label for="file">File:</label>
+  <input type="text" id="file" name="file" value="">
+</div>
+
+<div class="form-group">
+  <label for="output">Output:</label>
+  <input type="text" id="output" name="output" value="">
+</div>
+
+<div class="form-group">
+  <label for="comparison">Comparison:</label>
+  <input type="text" id="comparison" name="comparison" value="">
+</div>
+
+<div class="form-group">
+  <label for="points">Points:</label>
+  <input type="number" id="points" name="points" value="">
+</div>
+
+<button onclick="updateJSON()">Save Changes</button>
 		</div>
 		</body>
 		</html>`;

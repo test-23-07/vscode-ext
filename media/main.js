@@ -36,7 +36,6 @@ let data = { "repo": "blah",
 ]
 };
 
-
 function setViewConfig(){
     document.getElementById("config").style.visibility = "visible";
     document.getElementById("tests").style.visibility = "hidden";
@@ -47,18 +46,15 @@ function setViewTests(){
     document.getElementById("tests").style.visibility = "visible";
 }
 
-
 window.addEventListener('DOMContentLoaded', event => 
-
-
 {
+    
     console.log("DOMContentLoaded");
+    setViewConfig();
     const vscode = acquireVsCodeApi();
 
     const oldState = /** @type {{ count: number} | undefined} */ (vscode.getState());
         
-
-
         for (const key of Object.keys(data)) {
             temp = /** @type {HTMLInputElement} */ document.getElementById(key);
             if(!temp) {
