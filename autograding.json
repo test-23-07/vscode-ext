@@ -1,0 +1,65 @@
+{ "repo":false,
+  "introduction": "Eure Aufgabe ist es, eine YAML-Datei namens test.yaml zu erstellen",
+  "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/640px-Tic_tac_toe.svg.png",
+  "timeframe":"30 Minuten (Viel Erfolg!)",
+  "tests": [
+
+     {
+      "specs": {"title":"YAML Datei erstellen"},
+      "name": "checking your YAML file",
+      "feedback": "YAML error",
+      "urls":[""],
+      "keywords": [""],
+      "type": "YAML",
+      "run": ".name",
+      "file": "test.yaml",
+      "output": "Boris",
+      "comparison": "exact",
+      "points": 5
+    },
+     {
+      "specs": {"title":"CFN Template erstellen"},
+      "name": "checking your CFN file",
+      "feedback": "CFN error",
+      "urls":[""],
+      "keywords": [""],
+      "type": "CFN",
+      "run": "validate",
+      "file": "template.yaml",
+      "output": "",
+      "comparison": "",
+      "points": 5
+    },
+      {
+      "specs": {"title":"JMESPath  Test"},
+      "name": "checking JSON",
+      "feedback": "JSON error",
+      "urls":[""],
+      "keywords": [""],
+      "type": "JMESPATH",
+      "run": "name",
+      "file": "test.json",
+      "output": "Johnny",
+      "comparison": "exact",
+      "points": 5
+    },
+      {
+      "specs": {"title":"Schreibe eine Python Funktion namens sayHello() in die Datei main.py"},
+      "name": "checking main.py for sayHello() function",
+      "feedback": "Python error",
+      "urls":[""],
+      "keywords": [""],
+      "type": "PYTHONAST",
+      "run": ".//FunctionDef[name='sayHello']",
+      "file": "main.py",
+      "output": "",
+      "comparison": "",
+      "points": 5
+    }
+ 
+ 
+    
+
+
+  ]
+}
