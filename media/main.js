@@ -1,6 +1,7 @@
 // This script will be run within the webview itself
 // It cannot access the main VS Code APIs directly.
 
+//Testdaten
 // Sobald das hier läuft, sollten wir die Datei dynamisch laden
 let data = { "repo": "blah",
   "introduction": "Eure Aufgabe ist es, eine YAML-Datei namens test.yaml zu erstellen",
@@ -51,7 +52,7 @@ window.addEventListener('DOMContentLoaded', event =>
 {
     
     console.log("DOMContentLoaded");
-    setViewConfig();
+    setViewConfig(); // default view
     const vscode = acquireVsCodeApi();
 
     const oldState = /** @type {{ count: number} | undefined} */ (vscode.getState());

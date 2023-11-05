@@ -1,11 +1,5 @@
 import * as vscode from 'vscode';
 
-const cats = {
-	'Coding Cat': 'https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif',
-	'Compiling Cat': 'https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif',
-	'Testing Cat': 'https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif'
-};
-
 // https://code.visualstudio.com/api/extension-guides/tree-view
 class TestDataProvider implements vscode.TreeDataProvider<TestItem> {
     getTreeItem(element: TestItem): vscode.TreeItem {
@@ -60,7 +54,7 @@ function handleAutogradingFile(context: vscode.ExtensionContext, editor: vscode.
 	if (fileName.endsWith('autograding.json')) {
 	  try {
 		// Creates or shows the autograding panel
-		//HaaCPanel.createOrShow(context.extensionUri);
+		HaaCPanel.createOrShow(context.extensionUri);
 	  } catch (error) {
 		console.error('Failed to open autograding panel:', error);
 	  }
@@ -87,14 +81,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const testDataProvider = new TestDataProvider();
     vscode.window.registerTreeDataProvider('autogradingTests', testDataProvider);
-
-	context.subscriptions.push(
-		vscode.commands.registerCommand('HaaC.doRefactor', () => {
-			if (HaaCPanel.currentPanel) {
-				HaaCPanel.currentPanel.doRefactor();
-			}
-		})
-	);
 
 	if (vscode.window.registerWebviewPanelSerializer) {
 		// Make sure we register a serializer in activation event
@@ -222,26 +208,26 @@ class HaaCPanel {
 		// Vary the webview's content based on where it is located in the editor.
 		switch (this._panel.viewColumn) {
 			case vscode.ViewColumn.Two:
-				this._updateForCat(webview, 'Compiling Cat');
+				this._updateForCat(webview);
 				return;
 
 			case vscode.ViewColumn.Three:
-				this._updateForCat(webview, 'Testing Cat');
+				this._updateForCat(webview);
 				return;
 
 			case vscode.ViewColumn.One:
 			default:
-				this._updateForCat(webview, 'Coding Cat');
+				this._updateForCat(webview);
 				return;
 		}
 	}
 
-	private _updateForCat(webview: vscode.Webview, catName: keyof typeof cats) {
-		this._panel.title = catName;
-		this._panel.webview.html = this._getHtmlForWebview(webview, cats[catName]);
+	private _updateForCat(webview: vscode.Webview) {
+		this._panel.title = "HaaC";
+		this._panel.webview.html = this._getHtmlForWebview(webview);
 	}
 
-	private _getHtmlForWebview(webview: vscode.Webview, catGifPath: string) {
+	private _getHtmlForWebview(webview: vscode.Webview) {
 		// Local path to main script run in the webview
 		const scriptPathOnDisk = vscode.Uri.joinPath(this._extensionUri, 'media', 'main.js');
 
@@ -254,7 +240,7 @@ class HaaCPanel {
 		const stylesPathStylePath = vscode.Uri.joinPath(this._extensionUri, 'media', 'style.css');
 
 		// Uri to load styles into webview
-		const stylesResetUri = webview.asWebviewUri(styleResetPath);
+		const stylesResetUri = webview.asWebviewUri(styleResetPath); //FIXME: fehlt
 		const stylesMainUri = webview.asWebviewUri(stylesPathMainPath);
 		const stylesStyleUri = webview.asWebviewUri(stylesPathStylePath);
 
@@ -270,7 +256,7 @@ class HaaCPanel {
 				Use a content security policy to only allow loading images from https or from our extension directory,
 				and only allow scripts that have a specific nonce.
 		-->
-		<!-- macht Probleme bzgl unseres Codes
+		<!-- FIXME: macht Probleme bzgl unseres Codes
 		<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; img-src ${webview.cspSource} https:; script-src 'nonce-${nonce}';">
 		-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -291,7 +277,7 @@ class HaaCPanel {
 		<div id="config">
 		<div class="form-group">
 		  <label for="repo">Repo:</label>
-		  <input type="text" id="repo" name="repo">
+		  <input type="text" id="repo" name="repo" placeholder="GittyBitch/test-timetable-css">
 		</div>
 		
 		<div class="form-group">
