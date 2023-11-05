@@ -37,6 +37,17 @@ let data = { "repo": "blah",
 };
 
 
+function setViewConfig(){
+    document.getElementById("config").style.visibility = "visible";
+    document.getElementById("tests").style.visibility = "hidden";
+}
+
+function setViewTests(){
+    document.getElementById("config").style.visibility = "hidden";
+    document.getElementById("tests").style.visibility = "visible";
+}
+
+
 window.addEventListener('DOMContentLoaded', event => 
 
 
