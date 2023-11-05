@@ -184,58 +184,21 @@ class HaaCPanel {
 		// Use a nonce to only allow specific scripts to be run
 		const nonce = getNonce();
 
-		return `<!DOCTYPE html>67
+		return `<!DOCTYPE html>
 		<html lang="en">
 		<head>
 		<script nonce="${nonce}" src="${scriptUri}"></script>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Edit JSON</title>
-		<style>
-		  body {
-			font-family: Arial, sans-serif;
-			padding: 20px;
-		  }
-		  .form-group {
-			margin-bottom: 10px;
-		  }
-		  label {
-			display: block;
-			margin-bottom: 5px;
-		  }
-		  input[type="text"], input[type="url"] {
-			width: 100%;
-			padding: 8px;
-			margin-bottom: 10px;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-		  }
-		  input[type="checkbox"] {
-			margin-right: 5px;
-		  }
-		  button {
-			padding: 10px 15px;
-			background-color: #007bff;
-			color: white;
-			border: none;
-			border-radius: 4px;
-			cursor: pointer;
-		  }
-		  button:hover {
-			background-color: #0056b3;
-		  }
-		  .image-preview {
-			margin-bottom: 10px;
-		  }
-		  .image-preview img {
-			max-width: 100%;
-			height: auto;
-		  }
-		</style>
 		</head>
 		<body>
 		<h1>Edit JSON Data</h1>
-		
+		<div>
+		<button onclick="SetViewConfig();">Config</button>
+		<button onclick="SetViewTests();">Tests</button>
+		</div>
+		<div id="config">
 		<div class="form-group">
 		  <label for="repo">Repo:</label>
 		  <input type="text" id="repo" name="repo">
@@ -257,6 +220,10 @@ class HaaCPanel {
 		<div class="form-group">
 		  <label for="timeframe">Timeframe:</label>
 		  <input type="text" id="timeframe" name="timeframe" value="">
+		</div>
+		</div>
+		<div id="tests">
+		<h3>Tests</h3>
 		</div>
 		</body>
 		</html>`;
