@@ -370,6 +370,8 @@ class HaaCPanel {
 	}
 }
 
+export function deactivate() {}
+
 function getNonce() {
 	let text = '';
 	const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
