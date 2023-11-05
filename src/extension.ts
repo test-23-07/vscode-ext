@@ -242,7 +242,7 @@ class HaaCPanel {
 
 		// Uri to load styles into webview
 		const stylesResetUri = webview.asWebviewUri(styleResetPath); //FIXME: fehlt
-		const stylesMainUri = webview.asWebviewUri(stylesPathMainPath);
+		const stylesMainUri = "" //webview.asWebviewUri(stylesPathMainPath);
 		const stylesStyleUri = webview.asWebviewUri(stylesPathStylePath);
 
 		// Use a nonce to only allow specific scripts to be run
