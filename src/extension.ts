@@ -11,18 +11,41 @@ class TestDataProvider implements vscode.TreeDataProvider<TestItem> {
     getTreeItem(element: TestItem): vscode.TreeItem {
         return element;
     }
-
-    getChildren(element?: TestItem): Thenable<TestItem[]> {
+	getChildren(element?: TestItem): Thenable<TestItem[]> {
         if (element === undefined) {
             // Fetch and return the root test elements here
-            // For demonstration, returning hardcoded items
-	    // Hier müssen wir dann json laden
-            return Promise.resolve([new TestItem('Test 1'), new TestItem('Test 2')]);
-        }
+            const editor = vscode.window.activeTextEditor;
+            if (editor) {
+                const document = editor.document;
+                const text = document.getText();
 
-        // Return children of the given element here
-        return Promise.resolve([]);
+                try {
+                    const json = JSON.parse(text);
+                    const tests = json.tests;
+                    
+                    if (Array.isArray(tests)) {
+                        // Map the tests to TestItems using the 'name' property
+                        const testItems = tests.map(test => new TestItem(test.name));
+                        return Promise.resolve(testItems);
+                    } else {
+                        vscode.window.showWarningMessage('No tests vector found in JSON');
+                        return Promise.resolve([]);
+                    }
+                } catch (error) {
+                    vscode.window.showErrorMessage('Error parsing JSON: ' + error);
+                    return Promise.resolve([]);
+                }
+            } else {
+                vscode.window.showWarningMessage('No open text editor');
+                return Promise.resolve([]);
+            }
+        } else {
+            // Handle child elements if necessary
+            // ...
+            return Promise.resolve([]);
+        }
     }
+	
 }
 
 class TestItem extends vscode.TreeItem {
@@ -37,7 +60,7 @@ function handleAutogradingFile(context: vscode.ExtensionContext, editor: vscode.
 	if (fileName.endsWith('autograding.json')) {
 	  try {
 		// Creates or shows the autograding panel
-		HaaCPanel.createOrShow(context.extensionUri);
+		//HaaCPanel.createOrShow(context.extensionUri);
 	  } catch (error) {
 		console.error('Failed to open autograding panel:', error);
 	  }
