@@ -51,10 +51,11 @@ class TestItem extends vscode.TreeItem {
 // Function to handle autograding file
 function handleAutogradingFile(context: vscode.ExtensionContext, editor: vscode.TextEditor) {
 	let fileName = editor.document.fileName;
+	// TODO: use .github/classroom/autograding.json
 	if (fileName.endsWith('autograding.json')) {
 	  try {
 		// Creates or shows the autograding panel
-		HaaCPanel.createOrShow(context.extensionUri);
+		//HaaCPanel.createOrShow(context.extensionUri);
 	  } catch (error) {
 		console.error('Failed to open autograding panel:', error);
 	  }
