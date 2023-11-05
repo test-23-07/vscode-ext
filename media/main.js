@@ -62,7 +62,7 @@ window.addEventListener('DOMContentLoaded', event =>
                 continue;
             }
             temp.value = data[key];
-            console.log(key);
+            //console.log(key);
           }
 
     /*

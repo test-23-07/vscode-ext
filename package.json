@@ -16,19 +16,14 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onWebviewPanel:HaaC"
+		"onLanguage:json"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "HaaC.start",
-				"title": "Start haac session",
-				"category": "HaaC"
-			},
-			{
-				"command": "HaaC.doRefactor",
-				"title": "Do some refactoring",
+				"title": "Start HaaC session",
 				"category": "HaaC"
 			}
 		],

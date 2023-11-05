@@ -31,15 +31,36 @@ class TestItem extends vscode.TreeItem {
         // Additional properties and methods can be added as needed
     }
 }
-
+// Function to handle autograding file
+function handleAutogradingFile(context: vscode.ExtensionContext, editor: vscode.TextEditor) {
+	let fileName = editor.document.fileName;
+	if (fileName.endsWith('autograding.json')) {
+	  try {
+		// Creates or shows the autograding panel
+		HaaCPanel.createOrShow(context.extensionUri);
+	  } catch (error) {
+		console.error('Failed to open autograding panel:', error);
+	  }
+	}
+  }
 
 export function activate(context: vscode.ExtensionContext) {
+	console.log('Extension HaaC is now active.');
+
+	// Registering the event listener for active text editor changes
+	context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor(editor => {
+	  if (editor) {
+		handleAutogradingFile(context, editor);
+	  }
+	}));
+
 	context.subscriptions.push(
 		vscode.commands.registerCommand('HaaC.start', () => {
 			HaaCPanel.createOrShow(context.extensionUri);
-		})
+		}));
+
 		
-	);
+	
 
 	const testDataProvider = new TestDataProvider();
     vscode.window.registerTreeDataProvider('autogradingTests', testDataProvider);
